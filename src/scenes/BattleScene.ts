@@ -3697,13 +3697,48 @@ export class BattleScene extends Phaser.Scene {
     // Check if any heroes leveled up
     const levelUps = xpSummaries.filter((s) => s.leveledUp);
 
-    this.scene.start('IshetarScene1', {
-      heroId: this.heroId,
-      heroState: updatedHeroState,
-      gameFlags: this.gameFlags,
-      playTime: this.playTime,
-      levelUps: levelUps.length > 0 ? levelUps : undefined,
-    });
+    // Determine return destination based on battle
+    // - South Gate: return to IshetarScene1 (pre-South Gate town)
+    // - Hunting Paths/Quetzi Shrine: return to IshetarScene2 (post-South Gate town)
+    // - Hellhound Cave: return to TravelScene near Quetzi Shrine (so ambush can trigger again)
+    if (this.battleMap === 'hellhound_cave') {
+      // Return to travel map near Quetzi Shrine so the ambush can trigger again
+      this.scene.start('TravelScene', {
+        heroId: this.heroId,
+        heroState: updatedHeroState,
+        gameFlags: this.gameFlags,
+        playTime: this.playTime,
+        playerPosition: { x: 4, y: 13 }, // Left of Quetzi Shrine marker
+        levelUps: levelUps.length > 0 ? levelUps : undefined,
+        inventory: this.inventory,
+        chests: this.chestStates,
+        devMode: this.devMode,
+      });
+    } else if (this.battleMap === 'hunting_paths' || this.battleMap === 'quetzi_shrine') {
+      // Return to post-South Gate town
+      this.scene.start('IshetarScene2', {
+        heroId: this.heroId,
+        heroState: updatedHeroState,
+        gameFlags: this.gameFlags,
+        playTime: this.playTime,
+        levelUps: levelUps.length > 0 ? levelUps : undefined,
+        inventory: this.inventory,
+        chests: this.chestStates,
+        devMode: this.devMode,
+      });
+    } else {
+      // South Gate or unknown: return to pre-South Gate town
+      this.scene.start('IshetarScene1', {
+        heroId: this.heroId,
+        heroState: updatedHeroState,
+        gameFlags: this.gameFlags,
+        playTime: this.playTime,
+        levelUps: levelUps.length > 0 ? levelUps : undefined,
+        inventory: this.inventory,
+        chests: this.chestStates,
+        devMode: this.devMode,
+      });
+    }
   }
 
   /**

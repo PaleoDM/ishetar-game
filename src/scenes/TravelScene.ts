@@ -411,10 +411,11 @@ export class TravelScene extends Phaser.Scene {
    * Returns true if a trigger activated
    */
   private checkSpecialTriggers(): boolean {
-    // Hellhound ambush: triggers on row 19 after Quetzi Shrine is complete
+    // Hellhound ambush: triggers on row 19 after Quetzi Shrine is complete, until hellhounds are defeated
+    // Uses hellhound_cave_battle_complete instead of hellhound_ambush_triggered so ambush re-triggers if player loses
     if (
       this.gameFlags['quetzi_shrine_battle_complete'] &&
-      !this.gameFlags['hellhound_ambush_triggered'] &&
+      !this.gameFlags['hellhound_cave_battle_complete'] &&
       this.playerGridY === 19
     ) {
       this.triggerHellhoundAmbush();
