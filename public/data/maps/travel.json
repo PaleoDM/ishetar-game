@@ -1,0 +1,93 @@
+{
+  "id": "travel",
+  "displayName": "Wilderness",
+  "gridWidth": 24,
+  "gridHeight": 24,
+  "terrain": [
+    [2,2,2,2,2,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0],
+    [2,2,2,2,2,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0],
+    [2,2,2,2,2,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0],
+    [2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0],
+    [2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0],
+    [2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0],
+    [2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0],
+    [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0],
+    [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0],
+    [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0],
+    [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0],
+    [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0],
+    [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0],
+    [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0],
+    [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0],
+    [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0],
+    [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0],
+    [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0],
+    [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0],
+    [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0],
+    [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0],
+    [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0],
+    [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0],
+    [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0]
+  ],
+  "playerStart": { "x": 5, "y": 21 },
+  "locations": [
+    {
+      "id": "ishetar",
+      "name": "Ishetar",
+      "bounds": { "x1": 5, "y1": 22, "x2": 5, "y2": 22 },
+      "markerPosition": { "x": 5, "y": 22 },
+      "type": "town",
+      "description": [
+        "The village of Ishetar lies ahead.",
+        "Smoke rises gently from the chimneys. Home."
+      ],
+      "targetScene": "TownScene"
+    },
+    {
+      "id": "hunting_paths",
+      "name": "Hunting Paths",
+      "bounds": { "x1": 6, "y1": 18, "x2": 6, "y2": 18 },
+      "markerPosition": { "x": 6, "y": 18 },
+      "type": "battle",
+      "description": [
+        "These old hunting trails are well worn.",
+        "But that doesn't mean they're safe..."
+      ],
+      "battleMap": "hunting_paths"
+    },
+    {
+      "id": "quetzi_shrine",
+      "name": "Quetzi Shrine",
+      "bounds": { "x1": 5, "y1": 13, "x2": 5, "y2": 13 },
+      "markerPosition": { "x": 5, "y": 13 },
+      "type": "battle",
+      "description": [
+        "You arrive at the ancient shrine on the coastal cliff.",
+        "It is a sacred place, but something feels terribly wrong..."
+      ],
+      "battleMap": "quetzi_shrine"
+    },
+    {
+      "id": "red_vale_pass",
+      "name": "Red Vale Pass",
+      "bounds": { "x1": 9, "y1": 0, "x2": 9, "y2": 0 },
+      "markerPosition": { "x": 9, "y": 0 },
+      "type": "blocked",
+      "description": [
+        "This pass leads to the Red Vale. It's much too dangerous!"
+      ]
+    },
+    {
+      "id": "old_maple_tree",
+      "name": "Old Maple Tree",
+      "bounds": { "x1": 11, "y1": 20, "x2": 11, "y2": 20 },
+      "markerPosition": { "x": 11, "y": 20 },
+      "type": "explore",
+      "description": [
+        "A queit place where an ancient maple tree stands here, its trunk wider than a house.",
+        "Thump visits often, and tends to the spirits here. It is peaceful here."
+      ],
+      "exploreMap": "maple_tree"
+    }
+  ]
+}

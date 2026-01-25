@@ -1,0 +1,131 @@
+{
+  "opening": [
+    { "speaker": "miss_tibbets", "text": "Ah, welcome, welcome! Please, come in from the cold." },
+    { "speaker": "miss_tibbets", "text": "My name is Miss Tibbets, and I shall be your guide through this tale." },
+    { "speaker": "miss_tibbets", "text": "The town of Ishetar has seen better days, I'm afraid." },
+    { "speaker": "miss_tibbets", "text": "But that's precisely why we need heroes like yourself." },
+    { "speaker": "miss_tibbets", "text": "Now then, let me tell you how this all began..." },
+    { "speaker": "miss_tibbets", "text": "[PLACEHOLDER - More opening dialogue will go here]" },
+    { "speaker": "miss_tibbets", "text": "But enough of my rambling. Ishetar awaits!" }
+  ],
+  "baker_intro": [
+    { "speaker": null, "name": "Baker", "text": "Fresh bread! Well... fresh-ish." },
+    { "speaker": null, "name": "Baker", "text": "Come back when you've got coin, friend." }
+  ],
+  "guard_intro": [
+    { "speaker": null, "name": "Town Guard", "text": "Keep your wits about you." },
+    { "speaker": null, "name": "Town Guard", "text": "Strange things have been happening at the south gate lately." }
+  ],
+  "elder_intro": [
+    { "speaker": null, "name": "Elder", "text": "These old bones remember when Ishetar was peaceful..." },
+    { "speaker": null, "name": "Elder", "text": "Pray we see such days again." }
+  ],
+  "shrine_pelor": [
+    { "speaker": null, "name": "Shrine", "text": "*You burn your offering at the shrine. You find yourself fully rested. Would you like to record your progress for the bards?*" }
+  ],
+  "meris_thanks": [
+    { "speaker": "meris", "text": "Thank you so much for rescuing me and Ellie." },
+    { "speaker": "meris", "text": "Please, I desperately need to speak to Lady Rowena!" }
+  ],
+  "rowena_intro": [
+    { "speaker": "rowena", "text": "Welcome, travelers. I am Lady Rowena, keeper of Ishetar." },
+    { "speaker": "rowena", "text": "The road ahead is perilous, but I sense great potential in you." }
+  ],
+  "rowena_post_battle": [
+    { "speaker": "rowena", "text": "The young woman you saved is called Meris." },
+    { "speaker": "rowena", "text": "She speaks of dark tidings from the Red Vale. We must discuss this further." },
+    { "speaker": "rowena", "text": "Rest for now. When you are ready, we shall speak of what is to come." }
+  ],
+  "guard_north": [
+    { "speaker": null, "name": "Town Guard", "text": "The northern road leads to the wilds." },
+    { "speaker": null, "name": "Town Guard", "text": "Not much out there but trouble these days." }
+  ],
+  "guard_north_post_battle": [
+    { "speaker": null, "name": "Town Guard", "text": "Fine work at the south gate!" },
+    { "speaker": null, "name": "Town Guard", "text": "Those devils came out of nowhere. Thank the gods you were here." }
+  ],
+  "guard_east": [
+    { "speaker": null, "name": "Town Guard", "text": "Keep your wits about you." },
+    { "speaker": null, "name": "Town Guard", "text": "Strange things have been happening at the south gate lately." }
+  ],
+  "guard_east_post_battle": [
+    { "speaker": null, "name": "Town Guard", "text": "The south gate is secure again, thanks to you." },
+    { "speaker": null, "name": "Town Guard", "text": "But I wonder... where did those creatures come from?" }
+  ],
+  "villager_male": [
+    { "speaker": null, "name": "Baker", "text": "Fresh bread! Well... fresh-ish." },
+    { "speaker": null, "name": "Baker", "text": "Come back when you've got coin, friend." }
+  ],
+  "villager_male_post_battle": [
+    { "speaker": null, "name": "Baker", "text": "Heroes! You saved my shop from those monsters!" },
+    { "speaker": null, "name": "Baker", "text": "Here, take a loaf on the house. You've earned it." }
+  ],
+  "villager_female": [
+    { "speaker": null, "name": "Gertrude", "text": "Oh, visitors! We don't get many of those these days." },
+    { "speaker": null, "name": "Gertrude", "text": "Be careful in town. Strange things are afoot." }
+  ],
+  "villager_female_post_battle": [
+    { "speaker": null, "name": "Gertrude", "text": "Bless you! That poor young woman was so frightened." },
+    { "speaker": null, "name": "Gertrude", "text": "Lady Rowena is tending to her now. Such a brave soul." }
+  ],
+  "child_male": [
+    { "speaker": null, "name": "Young Boy", "text": "Wow, are you adventurers? You look so cool!" },
+    { "speaker": null, "name": "Young Boy", "text": "I wanna be a hero when I grow up!" }
+  ],
+  "child_male_post_battle": [
+    { "speaker": null, "name": "Young Boy", "text": "Did you really fight those monsters?!" },
+    { "speaker": null, "name": "Young Boy", "text": "That was amazing! Pow! Zap! You showed them!" }
+  ],
+  "child_female": [
+    { "speaker": null, "name": "Young Girl", "text": "My mama says strangers are dangerous." },
+    { "speaker": null, "name": "Young Girl", "text": "But you seem nice. I like your sword!" }
+  ],
+  "child_female_post_battle": [
+    { "speaker": null, "name": "Young Girl", "text": "Thank you for saving the lady with the horse!" },
+    { "speaker": null, "name": "Young Girl", "text": "She was crying but now she's with Lady Rowena." }
+  ],
+  "hrothgar": [
+    { "speaker": null, "name": "Hrothgar", "text": "Hm? What do you want, stranger?" },
+    { "speaker": null, "name": "Hrothgar", "text": "I'm a blacksmith, not a tour guide. Come back if you need gear." }
+  ],
+  "hrothgar_post_battle": [
+    { "speaker": null, "name": "Hrothgar", "text": "Well fought! Those blades of yours held up nicely." },
+    { "speaker": null, "name": "Hrothgar", "text": "Stop by the forge later. I might have something special for you." }
+  ],
+  "rowena_post_tutorial": [
+    { "speaker": "rowena", "text": "You've done it. Quetzi is safe, the beasts are slain, and Ishetar breathes easier." },
+    { "speaker": "rowena", "text": "Meris and her family are recovering well. They speak highly of you." },
+    { "speaker": "rowena", "text": "Rest now, heroes. You've earned it. But I sense this is only the beginning..." }
+  ],
+  "guard_north_post_tutorial": [
+    { "speaker": null, "name": "Town Guard", "text": "The roads are safer thanks to you!" },
+    { "speaker": null, "name": "Town Guard", "text": "First the devils, then those hellhounds... Ishetar is lucky to have you." }
+  ],
+  "guard_east_post_tutorial": [
+    { "speaker": null, "name": "Town Guard", "text": "Word is you cleared out a whole pack of hellhounds!" },
+    { "speaker": null, "name": "Town Guard", "text": "The merchants will be able to travel safely again. Thank you." }
+  ],
+  "villager_male_post_tutorial": [
+    { "speaker": null, "name": "Baker", "text": "Heroes! The whole town is talking about your deeds!" },
+    { "speaker": null, "name": "Baker", "text": "Free bread for you, anytime. You've more than earned it." }
+  ],
+  "villager_female_post_tutorial": [
+    { "speaker": null, "name": "Gertrude", "text": "Oh my stars, you saved Meris AND her family!" },
+    { "speaker": null, "name": "Gertrude", "text": "And cleared those awful beasts from the roads! Bless you, truly." }
+  ],
+  "child_male_post_tutorial": [
+    { "speaker": null, "name": "Young Boy", "text": "You fought HELLHOUNDS?! Real actual hellhounds?!" },
+    { "speaker": null, "name": "Young Boy", "text": "I'm gonna tell EVERYONE! You're the coolest heroes ever!" }
+  ],
+  "child_female_post_tutorial": [
+    { "speaker": null, "name": "Young Girl", "text": "Meris told me you saved her whole family!" },
+    { "speaker": null, "name": "Young Girl", "text": "And a dragon too! Well... a little dragon. She's so pretty!" }
+  ],
+  "hrothgar_post_tutorial": [
+    { "speaker": null, "name": "Hrothgar", "text": "Hellhound fangs and devil spines... fine materials indeed." },
+    { "speaker": null, "name": "Hrothgar", "text": "Come back when you're ready. I'll forge you something worthy of your deeds." }
+  ],
+  "pelor_post_tutorial": [
+    { "speaker": null, "name": "Shrine", "text": "*The flame burns bright. You sense the gods are pleased with your heroism.*" }
+  ]
+}

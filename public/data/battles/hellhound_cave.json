@@ -1,0 +1,65 @@
+{
+  "id": "hellhound_cave",
+  "displayName": "Hellhound Cave",
+  "mapImage": "map_hellhound_cave",
+  "gridWidth": 16,
+  "gridHeight": 16,
+  "terrain": [
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,1,1,2,2,2,2,2,2,1,1,2,2,2],
+    [2,2,2,1,1,1,2,2,2,2,1,1,1,2,2,2],
+    [2,2,2,1,1,1,0,0,0,0,1,1,1,2,2,2],
+    [2,2,2,1,1,1,0,0,0,0,0,0,1,2,2,2],
+    [2,2,2,1,1,1,0,0,0,0,0,0,1,2,2,2],
+    [2,2,2,1,0,0,1,0,0,0,1,0,1,2,2,2],
+    [2,2,2,1,0,0,1,0,0,0,0,1,1,2,2,2],
+    [2,2,2,1,0,0,0,0,0,0,0,0,1,2,2,2],
+    [2,2,2,1,0,0,0,0,0,0,0,1,1,2,2,2],
+    [2,2,2,2,1,1,0,0,0,0,0,1,2,2,2,2],
+    [2,2,2,2,2,2,0,0,0,0,2,2,2,2,2,2],
+    [2,2,2,2,2,2,0,0,0,0,2,2,2,2,2,2],
+    [2,2,2,2,2,2,0,0,0,0,2,2,2,2,2,2],
+    [2,2,2,2,2,2,0,0,0,0,2,2,2,2,2,2]
+  ],
+  "heroStartPositions": [
+    { "x": 7, "y": 14 },
+    { "x": 8, "y": 14 },
+    { "x": 7, "y": 15 },
+    { "x": 8, "y": 15 },
+    { "x": 6, "y": 15 }
+  ],
+  "heroFacing": "north",
+  "enemyFacing": "south",
+  "heroLevel": 3,
+  "enemies": [
+    { "type": "hellhound", "x": 7, "y": 5 },
+    { "type": "death_dog", "x": 4, "y": 9 },
+    { "type": "death_dog", "x": 5, "y": 7 },
+    { "type": "death_dog", "x": 9, "y": 7 },
+    { "type": "death_dog", "x": 10, "y": 9 }
+  ],
+  "chests": [
+    { "id": "hellhound_cave_chest_1", "x": 3, "y": 8, "facing": "east" },
+    { "id": "hellhound_cave_chest_2", "x": 12, "y": 5, "facing": "west" }
+  ],
+  "victoryCondition": "defeat_all",
+  "defeatCondition": "all_heroes_down",
+  "introCutscene": [
+    { "speaker": "Vicas", "text": "We've got civilians. Let's not do anything too crazy." },
+    { "speaker": "Thump", "text": "These beasts don't belong this close to Ishetar." },
+    { "speaker": "Azrael", "text": "If we leave them, they'll just cause trouble later." },
+    { "speaker": "Rooker", "text": "Monster parts are powerful spell components..." },
+    { "speaker": "Lyra", "text": "Then let's do this. By the book. No mistakes." },
+    { "speaker": "Narrator", "text": "Roll for Initiative!" }
+  ],
+  "victoryCutscene": [
+    { "speaker": "Narrator", "text": "The monsters are felled, and all is quiet once more..." }
+  ],
+  "postVictoryMode": "explore",
+  "exitTrigger": {
+    "bounds": { "x1": 5, "y1": 15, "x2": 9, "y2": 15 },
+    "destination": "travel"
+  },
+  "returnPosition": { "x": 5, "y": 20 }
+}

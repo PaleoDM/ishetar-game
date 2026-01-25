@@ -1,0 +1,77 @@
+{
+  "id": "quetzi_shrine",
+  "displayName": "Quetzi Shrine",
+  "mapImage": "map_quetzi_shrine",
+  "gridWidth": 24,
+  "gridHeight": 16,
+  "terrain": [
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,1,1,1,2,2,2,0,0,0,0,0,0,0,0],
+    [2,2,2,2,2,2,2,2,2,2,1,1,1,0,0,0,0,0,0,0,0,2,0,0],
+    [0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0],
+    [0,2,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0],
+    [0,2,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0],
+    [0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0],
+    [0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0],
+    [0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,2,0,0],
+    [0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0],
+    [0,2,0,0,0,0,0,2,0,0,1,1,1,0,0,2,0,0,0,0,0,2,2,0],
+    [0,2,0,0,0,0,0,2,2,0,0,0,0,0,2,2,0,0,0,0,0,2,2,0],
+    [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2],
+    [2,2,2,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,2,2,2,2],
+    [2,2,2,0,0,0,0,0,0,0,0,1,1,0,0,2,2,2,2,2,2,2,2,2]
+  ],
+  "heroStartPositions": [
+    { "x": 2, "y": 8 },
+    { "x": 2, "y": 7 },
+    { "x": 2, "y": 9 },
+    { "x": 1, "y": 7 },
+    { "x": 1, "y": 9 }
+  ],
+  "heroFacing": "east",
+  "enemyFacing": "west",
+  "heroLevel": 2,
+  "enemies": [
+    { "type": "vessan", "x": 11, "y": 8 },
+    { "type": "divine_wisp", "x": 10, "y": 7 },
+    { "type": "divine_wisp", "x": 10, "y": 9 },
+    { "type": "divine_wisp", "x": 13, "y": 7 },
+    { "type": "divine_wisp", "x": 13, "y": 9 }
+  ],
+  "props": [
+    { "sprite": "sprite_quetzi_left", "x": 12, "y": 8, "rotation": 90 },
+    { "sprite": "sprite_villager_male_front", "x": 14, "y": 7, "rotation": 90 },
+    { "sprite": "sprite_child_male_front", "x": 14, "y": 9, "rotation": 90 }
+  ],
+  "chests": [
+    { "id": "quetzi_shrine_chest_1", "x": 11, "y": 2 },
+    { "id": "quetzi_shrine_chest_2", "x": 11, "y": 14, "facing": "north" }
+  ],
+  "victoryCondition": "defeat_all",
+  "defeatCondition": "all_heroes_down",
+  "introCutscene": [
+    { "speaker": "Lyra", "text": "There's a divine presence here. But it feels...corrupted. Profane, even." },
+    { "speaker": "Thump", "text": "I can feel a spirit. A powerful one. But she's fading!" },
+    { "speaker": "Vicas", "text": "Look! Civilians! That must be Meris's family." },
+    { "speaker": "Azrael", "text": "This is dredging up some painful memories..." },
+    { "speaker": "Rooker", "text": "Look at those runes on the shrine. We need to act fast!" },
+    { "speaker": "Vessan", "text": "Three hundred years I have waited. Three hundred years of silence, of solitude, of unwavering faith..." },
+    { "speaker": "Vessan", "text": "And now you come to undo it all? Very well. Let us see if your conviction burns as brightly as mine." },
+    { "speaker": "Narrator", "text": "Roll for Initiative!" }
+  ],
+  "victoryCutscene": [
+    { "speaker": "Narrator", "text": "Vessan is defeated, and the spirits begin to settle." },
+    { "speaker": "Narrator", "text": "You touch Quetzi, but her scales are colder than the oncoming winter." },
+    { "speaker": "Mickell", "text": "She saved me and poppa." },
+    { "speaker": "Mickell", "text": "We came to burn her an offering. She kept Vessan from hurting us." },
+    { "speaker": "Dalrick", "text": "We owe her, and you all, everything." },
+    { "speaker": "Dalrick", "text": "We've got to get her back to Ishetar, and fast!" }
+  ],
+  "postVictoryMode": "explore",
+  "exitTrigger": {
+    "bounds": { "x1": 0, "y1": 3, "x2": 0, "y2": 13 },
+    "destination": "travel"
+  },
+  "returnPosition": { "x": 5, "y": 13 }
+}
