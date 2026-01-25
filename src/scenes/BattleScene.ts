@@ -3931,8 +3931,8 @@ export class BattleScene extends Phaser.Scene {
       y += text.height + lineSpacing;
     }
 
-    // "Press SPACE to continue" prompt
-    const promptText = this.add.text(panelWidth / 2, panelHeight - 25, '[ Press SPACE to continue ]', {
+    // "Press ENTER to continue" prompt
+    const promptText = this.add.text(panelWidth / 2, panelHeight - 25, '[ Press ENTER to continue ]', {
       fontFamily: 'monospace',
       fontSize: '12px',
       color: '#888888',
@@ -4009,8 +4009,8 @@ export class BattleScene extends Phaser.Scene {
     xpText.setOrigin(0.5, 0.5);
     this.actionResultPanel.add(xpText);
 
-    // "Press SPACE to continue" prompt
-    const promptText = this.add.text(panelWidth / 2, panelHeight - 20, '[ SPACE ]', {
+    // "Press ENTER to continue" prompt
+    const promptText = this.add.text(panelWidth / 2, panelHeight - 20, '[ ENTER ]', {
       fontFamily: 'monospace',
       fontSize: '12px',
       color: '#888888',
@@ -6735,7 +6735,7 @@ export class BattleScene extends Phaser.Scene {
     descText.setOrigin(0.5, 0.5);
 
     // Continue prompt
-    const continueText = this.add.text(0, 65, '[Press SPACE]', {
+    const continueText = this.add.text(0, 65, '[Press ENTER]', {
       fontFamily: 'monospace',
       fontSize: '12px',
       color: '#888888',
