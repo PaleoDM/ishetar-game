@@ -4602,18 +4602,24 @@ export class BattleScene extends Phaser.Scene {
     // Build menu options
     const menuOptions = this.buildActionMenuOptions();
 
-    // Create menu container positioned near the unit
-    const screenWidth = this.cameras.main.width;
+    // Create menu container positioned in bottom-left, above the character panel
     const screenHeight = this.cameras.main.height;
 
-    this.actionMenuContainer = this.add.container(screenWidth / 2 - 130, screenHeight / 2 - 80);
+    // Menu dimensions
+    const menuWidth = 260;
+    const menuHeight = menuOptions.length * 30 + 20;
+
+    // Position: left-aligned (x=10), above the character panel (which is at screenHeight - 140)
+    const characterPanelTop = screenHeight - 140;
+    const menuX = 10;
+    const menuY = characterPanelTop - menuHeight - 10; // 10px gap above character panel
+
+    this.actionMenuContainer = this.add.container(menuX, menuY);
     this.actionMenuContainer.setScrollFactor(0);
     this.actionMenuContainer.setDepth(500);
     this.cameras.main.ignore(this.actionMenuContainer);
 
     // Background (wider to fit long ability names + costs)
-    const menuWidth = 260;
-    const menuHeight = menuOptions.length * 30 + 20;
     const bg = this.add.graphics();
     bg.fillStyle(0x000000, 0.9);
     bg.fillRoundedRect(0, 0, menuWidth, menuHeight, 5);
