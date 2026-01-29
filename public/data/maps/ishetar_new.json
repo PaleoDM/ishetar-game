@@ -38,7 +38,8 @@
     { "id": "villager_female", "name": "Gertrude", "x": 9, "y": 15, "portrait": null, "dialogue": "villager_female" },
     { "id": "child_male", "name": "Young Boy", "x": 15, "y": 18, "portrait": null, "dialogue": "child_male" },
     { "id": "child_female", "name": "Young Girl", "x": 22, "y": 15, "portrait": null, "dialogue": "child_female" },
-    { "id": "hrothgar", "name": "Hrothgar", "x": 12, "y": 15, "portrait": null, "dialogue": "hrothgar" }
+    { "id": "hrothgar", "name": "Hrothgar", "x": 12, "y": 15, "portrait": null, "dialogue": "hrothgar" },
+    { "id": "sombra", "name": "Sombra", "x": 20, "y": 3, "portrait": null, "dialogue": "sombra" }
   ],
   "heroPositions": [
     { "x": 17, "y": 10 },

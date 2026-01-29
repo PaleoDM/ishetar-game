@@ -387,6 +387,11 @@ export class IshetarScene1 extends Phaser.Scene {
       pelor: [
         "*You burn your offering at the shrine. You find yourself fully rested. Would you like to record your progress for the bards?*"
       ],
+      sombra: [
+        "Ishetar is a small town, but it was built in a tumultuous region.",
+        "For centuries, devil and celestial forces battled here. When they called a truce, it was given to the fey for 1,000 years!",
+        "It's a perfect place to come study wild and unusual magic! Dangerous though..."
+      ],
     };
 
     // Hero dialogues (when talking to party members)
@@ -426,6 +431,8 @@ export class IshetarScene1 extends Phaser.Scene {
         spriteKey = 'sprite_child_female_front';
       } else if (npcInfo.id === 'hrothgar') {
         spriteKey = 'sprite_villager_male_front';
+      } else if (npcInfo.id === 'sombra') {
+        spriteKey = 'sprite_sombra_front';
       }
 
       // Use NPC sprite if available, otherwise yellow placeholder

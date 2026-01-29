@@ -379,6 +379,13 @@ export class IshetarScene2 extends Phaser.Scene {
           "And be sure to bring me any equipment you find. I can help you attune to it."
         ]
       },
+      {
+        id: 'sombra', name: 'Sombra', x: 20, y: 3,
+        sprite: 'sprite_sombra_front',
+        dialogue: [
+          "Devils. At the gate. I admit to being curious, but not this close..."
+        ]
+      },
     ];
 
     npcData.forEach(npc => {

@@ -37,6 +37,7 @@ export class NarratorScene extends Phaser.Scene {
     { name: 'Battle: Hunting Paths', scene: 'BattleScene:hunting_paths', description: 'Lv2 - Ogre battle' },
     { name: 'Battle: Quetzi Shrine', scene: 'BattleScene:quetzi_shrine', description: 'Lv2 - Rescue mission' },
     { name: 'Battle: Hellhound Cave', scene: 'BattleScene:hellhound_cave', description: 'Lv3 - Final battle' },
+    { name: 'Battle: Maple Tree', scene: 'BattleScene:maple_tree', description: 'Lv4 - Bonus battle' },
     { name: 'MenuScene', scene: 'MenuScene', description: 'Party stats overlay' },
   ];
   private devSceneTexts: Phaser.GameObjects.Text[] = [];
@@ -301,6 +302,7 @@ export class NarratorScene extends Phaser.Scene {
         case 'hunting_paths': return 2;
         case 'quetzi_shrine': return 2;
         case 'hellhound_cave': return 3;
+        case 'maple_tree': return 4;
         default: return 1;
       }
     };

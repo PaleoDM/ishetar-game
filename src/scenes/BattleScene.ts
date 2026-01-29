@@ -2768,6 +2768,11 @@ export class BattleScene extends Phaser.Scene {
       this.time.delayedCall(300, () => {
         this.enterExplorationMode();
       });
+    } else if (this.battleConfig.postVictoryMode === 'to_be_continued') {
+      // Show "To Be Continued" screen
+      this.time.delayedCall(300, () => {
+        this.showToBeContinued();
+      });
     } else {
       // After cutscene, return to town
       this.time.delayedCall(300, () => {
@@ -6801,5 +6806,78 @@ export class BattleScene extends Phaser.Scene {
       this.lootPopupContainer = null;
     }
     this.lootPopupActive = false;
+  }
+
+  /**
+   * Show "To Be Continued" screen after victory
+   */
+  private showToBeContinued(): void {
+    // Clear all battle UI
+    this.clearBattleElements();
+
+    // Create a dark overlay
+    const overlay = this.add.rectangle(
+      GAME_CONFIG.WIDTH / 2,
+      GAME_CONFIG.HEIGHT / 2,
+      GAME_CONFIG.WIDTH,
+      GAME_CONFIG.HEIGHT,
+      0x000000,
+      0.7
+    );
+    overlay.setScrollFactor(0);
+    overlay.setDepth(100);
+    this.cameras.main.ignore(overlay);
+
+    // Add "TO BE CONTINUED" text
+    const toBeContinuedText = this.add.text(
+      GAME_CONFIG.WIDTH / 2,
+      GAME_CONFIG.HEIGHT / 2,
+      'TO BE CONTINUED',
+      {
+        fontFamily: 'monospace',
+        fontSize: '48px',
+        color: '#ffffff',
+        align: 'center',
+      }
+    );
+    toBeContinuedText.setOrigin(0.5, 0.5);
+    toBeContinuedText.setScrollFactor(0);
+    toBeContinuedText.setDepth(101);
+    toBeContinuedText.setResolution(GAME_CONFIG.TEXT_RESOLUTION);
+    this.cameras.main.ignore(toBeContinuedText);
+
+    // Fade in effect
+    toBeContinuedText.setAlpha(0);
+    this.tweens.add({
+      targets: toBeContinuedText,
+      alpha: 1,
+      duration: 2000,
+      ease: 'Power2',
+    });
+
+    // Add instruction text after a delay
+    this.time.delayedCall(2500, () => {
+      const instructionText = this.add.text(
+        GAME_CONFIG.WIDTH / 2,
+        GAME_CONFIG.HEIGHT / 2 + 80,
+        'Press ENTER to return to title',
+        {
+          fontFamily: 'monospace',
+          fontSize: '14px',
+          color: '#aaaaaa',
+          align: 'center',
+        }
+      );
+      instructionText.setOrigin(0.5, 0.5);
+      instructionText.setScrollFactor(0);
+      instructionText.setDepth(101);
+      instructionText.setResolution(GAME_CONFIG.TEXT_RESOLUTION);
+      this.cameras.main.ignore(instructionText);
+
+      // Wait for ENTER to return to title
+      this.waitForAdvance(() => {
+        this.scene.start('TitleScene');
+      });
+    });
   }
 }

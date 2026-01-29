@@ -148,6 +148,7 @@ export interface EnemyData {
   speed: number;
   abilities: string[];
   xpReward: number;
+  flying?: boolean; // Flying units ignore terrain restrictions
 }
 
 // =============================================================================
@@ -207,7 +208,7 @@ export interface BattleConfig {
   heroFacing?: 'north' | 'south' | 'east' | 'west'; // Initial facing direction for heroes (default: 'south')
   enemyFacing?: 'north' | 'south' | 'east' | 'west'; // Initial facing direction for enemies (default: 'north')
   heroLevel?: number; // Override hero level for testing (default: use saved state or 1)
-  postVictoryMode?: 'return_to_town' | 'explore'; // What happens after victory (default: return_to_town)
+  postVictoryMode?: 'return_to_town' | 'explore' | 'to_be_continued'; // What happens after victory (default: return_to_town)
   exitTrigger?: {
     bounds: { x1: number; y1: number; x2: number; y2: number };
     destination: 'travel' | 'town' | 'post_battle_town'; // Where to go when player enters the trigger zone
@@ -257,6 +258,7 @@ export interface Unit {
 
   // Special flags
   special?: string;
+  flying?: boolean; // Flying units ignore terrain restrictions
 
   // Equipment (heroes only)
   equipment?: string; // Equipped item ID

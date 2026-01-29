@@ -217,6 +217,7 @@ export class ExploreScene extends Phaser.Scene {
       "Vicas uses his knowledge of anatomy to guide Azrael's hand...",
       "Azrael uses his psychic blades to cut to Quetzi's soul...",
       'As the ritual comes to a close, our heroes wait with bated breath...',
+      '...and the shadows that cling to Quetzi rise up!',
     ];
 
     this.dialogueRenderer.startDialogue(
@@ -224,70 +225,19 @@ export class ExploreScene extends Phaser.Scene {
       'Narrator',
       () => {
         this.isInDialogue = false;
-        this.showToBeContinued();
+        // Launch the bonus battle instead of showing "To Be Continued"
+        this.scene.start('BattleScene', {
+          battleMap: 'maple_tree',
+          heroId: this.heroId,
+          heroState: this.heroState,
+          gameFlags: this.gameFlags,
+          playTime: this.playTime,
+          inventory: this.inventory,
+          chests: this.chestStates,
+          devMode: this.devMode,
+        });
       }
     );
-  }
-
-  private showToBeContinued(): void {
-    this.cutsceneComplete = true;
-
-    // Create a dark overlay
-    const overlay = this.add.rectangle(
-      this.cameras.main.scrollX + GAME_CONFIG.WIDTH / 2,
-      this.cameras.main.scrollY + GAME_CONFIG.HEIGHT / 2,
-      GAME_CONFIG.WIDTH,
-      GAME_CONFIG.HEIGHT,
-      0x000000,
-      0.7
-    );
-    overlay.setScrollFactor(0);
-    overlay.setDepth(100);
-
-    // Add "TO BE CONTINUED" text
-    const toBeContinuedText = this.add.text(
-      GAME_CONFIG.WIDTH / 2,
-      GAME_CONFIG.HEIGHT / 2,
-      'TO BE CONTINUED',
-      {
-        fontFamily: 'monospace',
-        fontSize: '48px',
-        color: '#ffffff',
-        align: 'center',
-      }
-    );
-    toBeContinuedText.setOrigin(0.5, 0.5);
-    toBeContinuedText.setScrollFactor(0);
-    toBeContinuedText.setDepth(101);
-    toBeContinuedText.setResolution(GAME_CONFIG.TEXT_RESOLUTION);
-
-    // Fade in effect
-    toBeContinuedText.setAlpha(0);
-    this.tweens.add({
-      targets: toBeContinuedText,
-      alpha: 1,
-      duration: 2000,
-      ease: 'Power2',
-    });
-
-    // Add instruction text after a delay
-    this.time.delayedCall(2500, () => {
-      const instructionText = this.add.text(
-        GAME_CONFIG.WIDTH / 2,
-        GAME_CONFIG.HEIGHT / 2 + 80,
-        'Press ESC to return',
-        {
-          fontFamily: 'monospace',
-          fontSize: '14px',
-          color: '#aaaaaa',
-          align: 'center',
-        }
-      );
-      instructionText.setOrigin(0.5, 0.5);
-      instructionText.setScrollFactor(0);
-      instructionText.setDepth(101);
-      instructionText.setResolution(GAME_CONFIG.TEXT_RESOLUTION);
-    });
   }
 
   private drawGridOverlay(): void {

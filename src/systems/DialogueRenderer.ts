@@ -202,9 +202,24 @@ export class DialogueRenderer {
 
   // Position the dialogue relative to a world position (e.g., the player)
   // Offset is how far from the target to place the top-left of the dialogue box
+  // Automatically flips to below if portrait would be cut off at top of screen
   positionRelativeTo(targetX: number, targetY: number, offsetX: number, offsetY: number): void {
     const newX = targetX + offsetX;
-    const newY = targetY + offsetY;
+    let newY = targetY + offsetY;
+
+    // Check if the portrait would be cut off at the top of the camera view
+    const camera = this.scene.cameras.main;
+    const cameraTop = camera.worldView.y;
+
+    // Portrait top in world coords = container Y + portrait relative Y (-150)
+    const portraitTopWorld = newY + this.portraitY;
+
+    // If portrait would be cut off, flip dialogue to below the target
+    if (portraitTopWorld < cameraTop) {
+      // Position below: target + some padding to clear the character sprite
+      newY = targetY + 40;
+    }
+
     this.container.setPosition(newX, newY);
   }
 

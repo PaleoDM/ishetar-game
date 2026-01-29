@@ -360,6 +360,10 @@ export class IshetarScene3 extends Phaser.Scene {
       pelor: [
         "*The flame burns bright. You sense the gods are pleased with your heroism.*"
       ],
+      sombra: [
+        "A corrupted celestial? And they tried to kill Quetzi?",
+        "I don't like this one bit. I'll search our ancient tomes and see if I can help somehow..."
+      ],
     };
 
     // Hero dialogues (post-tutorial)
@@ -397,6 +401,8 @@ export class IshetarScene3 extends Phaser.Scene {
         spriteKey = 'sprite_child_female_front';
       } else if (npcInfo.id === 'hrothgar') {
         spriteKey = 'sprite_villager_male_front';
+      } else if (npcInfo.id === 'sombra') {
+        spriteKey = 'sprite_sombra_front';
       }
 
       const sprite = this.textures.exists(spriteKey)

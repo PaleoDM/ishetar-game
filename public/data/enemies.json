@@ -25,7 +25,8 @@
     "resilience": 1,
     "speed": 2,
     "abilities": ["scratch", "fire_spit"],
-    "xpReward": 0
+    "xpReward": 0,
+    "flying": true
   },
   "spined_devil": {
     "id": "spined_devil",
@@ -39,7 +40,8 @@
     "resilience": 3,
     "speed": 1,
     "abilities": ["tail_swipe", "spine_volley"],
-    "xpReward": 0
+    "xpReward": 0,
+    "flying": true
   },
   "ogre_brute": {
     "id": "ogre_brute",
@@ -99,7 +101,25 @@
     "resilience": 2,
     "speed": 2,
     "abilities": ["sacred_flame", "cure_light_wounds"],
-    "xpReward": 25
+    "xpReward": 25,
+    "flying": true
+  },
+  "divine_wisp_dark": {
+    "id": "divine_wisp_dark",
+    "name": "Shadow Wisp",
+    "sprite": "sprite_divine_wisp_dark",
+    "hp": 14,
+    "maxHp": 14,
+    "mana": 14,
+    "maxMana": 14,
+    "attack": 3,
+    "defense": 11,
+    "magic": 14,
+    "resilience": 3,
+    "speed": 3,
+    "abilities": ["arcane_bolt", "hold", "poison_spit"],
+    "xpReward": 50,
+    "flying": true
   },
   "vessan": {
     "id": "vessan",

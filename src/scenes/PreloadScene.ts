@@ -53,6 +53,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('portrait_rowena', 'assets/portraits/rowena.png');
     this.load.image('portrait_meris', 'assets/portraits/meris.png');
     this.load.image('portrait_vessan', 'assets/portraits/vessan.png');
+    this.load.image('portrait_sombra', 'assets/portraits/sombra.png');
 
     // Title screen
     this.load.image('title_screen', 'assets/title_screen.png');
@@ -97,6 +98,12 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('sprite_quetzi_left', 'assets/sprites/npcs/quetzi_left.png');
     this.load.image('sprite_quetzi_right', 'assets/sprites/npcs/quetzi_right.png');
 
+    // Sombra sprites (all 4 directions)
+    this.load.image('sprite_sombra_front', 'assets/sprites/npcs/sombra_front.png');
+    this.load.image('sprite_sombra_back', 'assets/sprites/npcs/sombra_back.png');
+    this.load.image('sprite_sombra_left', 'assets/sprites/npcs/sombra_left.png');
+    this.load.image('sprite_sombra_right', 'assets/sprites/npcs/sombra_right.png');
+
     // Object sprites (chests, etc.) - 4 directions
     this.load.image('sprite_chest_closed_front', 'assets/sprites/objects/chest_closed_front.png');
     this.load.image('sprite_chest_closed_back', 'assets/sprites/objects/chest_closed_back.png');
@@ -126,7 +133,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.audio('music_combat', 'assets/audio/combat.mp3');
 
     // Enemy sprites (4 directions each)
-    const enemies = ['lemure', 'imp', 'spined_devil', 'ogre_brute', 'ogre_hunter', 'ogre_shaman', 'vessan', 'divine_wisp', 'hellhound', 'death_dog'];
+    const enemies = ['lemure', 'imp', 'spined_devil', 'ogre_brute', 'ogre_hunter', 'ogre_shaman', 'vessan', 'divine_wisp', 'divine_wisp_dark', 'hellhound', 'death_dog'];
     const enemyDirections = ['front', 'back', 'left', 'right'];
 
     enemies.forEach((enemy) => {
@@ -149,6 +156,7 @@ export class PreloadScene extends Phaser.Scene {
       'portrait_rooker',
       'portrait_rowena',
       'portrait_meris',
+      'portrait_sombra',
     ];
     portraitKeys.forEach((key) => {
       const texture = this.textures.get(key);

@@ -106,6 +106,7 @@ export function createEnemyUnit(
     hasMoved: false,
     hasActed: false,
     actionsRemaining: 1,
+    flying: enemyData.flying,
   };
 
   // Create sprite

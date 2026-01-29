@@ -24,6 +24,48 @@
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1]
   ],
   "playerStart": { "x": 12, "y": 14 },
+  "heroStartPositions": [
+    { "x": 12, "y": 9 },
+    { "x": 13, "y": 10 },
+    { "x": 13, "y": 8 },
+    { "x": 10, "y": 8 },
+    { "x": 10, "y": 10 }
+  ],
+  "heroFacing": "west",
+  "enemyFacing": "south",
+  "heroLevel": 4,
+  "enemies": [
+    { "type": "divine_wisp", "x": 11, "y": 4 },
+    { "type": "divine_wisp", "x": 17, "y": 9 },
+    { "type": "divine_wisp", "x": 7, "y": 9 },
+    { "type": "divine_wisp", "x": 11, "y": 13 },
+    { "type": "divine_wisp_dark", "x": 6, "y": 13 },
+    { "type": "divine_wisp_dark", "x": 17, "y": 13 },
+    { "type": "divine_wisp_dark", "x": 6, "y": 5 },
+    { "type": "divine_wisp_dark", "x": 17, "y": 5 }
+  ],
+  "props": [
+    { "sprite": "sprite_quetzi_left", "x": 11, "y": 9, "rotation": 90 }
+  ],
+  "chests": [],
+  "victoryCondition": "defeat_all",
+  "defeatCondition": "all_heroes_down",
+  "introCutscene": [
+    "Roll for Initiative!"
+  ],
+  "victoryCutscene": [
+    { "speaker": "Narrator", "text": "The shadows dissipate, and Quetzi stirs..." },
+    { "speaker": "Thump", "text": "Her spirit! It stirs anew...", "portrait": "portrait_thump" },
+    { "speaker": "Vicas", "text": "We did it? This is unprecedented...", "portrait": "portrait_vicas" },
+    { "speaker": "Rooker", "text": "Exactly! Wait until the Red Mantle hears about this. Talk about uncharted territory...", "portrait": "portrait_rooker" },
+    { "speaker": "Azrael", "text": "I wasn't nervous or anything. Unprecedented? C'mon, I do this kinda thing all the time!", "portrait": "portrait_azrael" },
+    { "speaker": "Lyra", "text": "You know Azrael, the gap between confidence and faith is razor thin...", "portrait": "portrait_lyra" },
+    { "speaker": "Quetzi", "text": "*cough cough*. Thank you heroes. I'm so lucky you came when you did." },
+    { "speaker": "Quetzi", "text": "There are dark omens on the horizon. The portents bring me awful visions..." },
+    { "speaker": "Quetzi", "text": "*shiver*. I need warmth. Back to that kind baker I think." },
+    { "speaker": "Quetzi", "text": "When I recover, we'll see to how I can repay you. I, and the celestials that still linger here, owe you a great boon..." }
+  ],
+  "postVictoryMode": "to_be_continued",
   "exitTrigger": {
     "bounds": { "x1": 10, "y1": 15, "x2": 13, "y2": 15 },
     "destination": "travel"

@@ -67,7 +67,9 @@ export class GridManager {
     return cell ? cell.terrain : TerrainType.Impassable;
   }
 
-  isWalkable(x: number, y: number): boolean {
+  isWalkable(x: number, y: number, flying?: boolean): boolean {
+    // Flying units can move over any terrain (except off-map)
+    if (flying) return this.isValidPosition(x, y);
     const terrain = this.getTerrain(x, y);
     return terrain !== TerrainType.Impassable;
   }
@@ -156,17 +158,17 @@ export class GridManager {
         const { x: nx, y: ny } = neighbor;
 
         if (!this.isValidPosition(nx, ny)) continue;
-        if (!this.isWalkable(nx, ny)) continue;
+        if (!this.isWalkable(nx, ny, unit.flying)) continue;
 
-        // Can move through allies but not enemies (even unconscious ones)
+        // Can move through allies and unconscious enemies, but not conscious enemies
         const occupant = this.getUnitAt(nx, ny);
         if (occupant && occupant !== unit) {
-          // Block movement through enemies completely
-          if (occupant.team !== unit.team) continue;
-          // Can path through allies (but can't stop on them - handled in filter below)
+          // Block movement through conscious enemies only
+          if (occupant.team !== unit.team && !occupant.isUnconscious) continue;
+          // Can path through allies and unconscious enemies (but can't stop on them - handled in filter below)
         }
 
-        const moveCost = this.getMoveCost(nx, ny);
+        const moveCost = this.getMoveCost(nx, ny, unit.flying);
         const newRemaining = remaining - moveCost;
 
         if (newRemaining < 0) continue;
@@ -189,7 +191,9 @@ export class GridManager {
   /**
    * Get movement cost for a tile (for future terrain effects)
    */
-  getMoveCost(x: number, y: number): number {
+  getMoveCost(x: number, y: number, flying?: boolean): number {
+    // Flying units ignore terrain costs
+    if (flying) return 1;
     const terrain = this.getTerrain(x, y);
     switch (terrain) {
       case TerrainType.Normal:
@@ -219,7 +223,7 @@ export class GridManager {
     unit: Unit
   ): { x: number; y: number }[] | null {
     if (!this.isValidPosition(goalX, goalY)) return null;
-    if (!this.isWalkable(goalX, goalY)) return null;
+    if (!this.isWalkable(goalX, goalY, unit.flying)) return null;
     if (this.isOccupied(goalX, goalY)) return null;
 
     const openSet: PathNode[] = [];
@@ -271,18 +275,18 @@ export class GridManager {
         const { x: nx, y: ny } = neighbor;
 
         if (!this.isValidPosition(nx, ny)) continue;
-        if (!this.isWalkable(nx, ny)) continue;
+        if (!this.isWalkable(nx, ny, unit.flying)) continue;
         if (closedSet.has(key(nx, ny))) continue;
 
-        // Can move through allies but not enemies (matching getMovementRange logic)
+        // Can move through allies and unconscious enemies (matching getMovementRange logic)
         const occupant = this.getUnitAt(nx, ny);
         if (occupant && occupant !== unit) {
-          // Block movement through enemies completely
-          if (occupant.team !== unit.team) continue;
-          // Can path through allies (but can't stop on them - goal check above ensures this)
+          // Block movement through conscious enemies only
+          if (occupant.team !== unit.team && !occupant.isUnconscious) continue;
+          // Can path through allies and unconscious enemies (but can't stop on them - goal check above ensures this)
         }
 
-        const moveCost = this.getMoveCost(nx, ny);
+        const moveCost = this.getMoveCost(nx, ny, unit.flying);
         const tentativeG = current.g + moveCost;
 
         // Check if already in open set with better score

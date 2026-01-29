@@ -93,25 +93,40 @@ export class AIController {
   }
 
   /**
-   * Try to find an attack we can make from current position
+   * Try to find an attack or debuff we can make from current position
    */
   private tryAttack(
     enemy: Unit,
     heroes: Unit[],
     abilities: Ability[]
   ): AIDecision | null {
-    // Get attack abilities sorted by damage potential (prefer higher damage)
-    const attackAbilities = abilities
-      .filter(a => a.type === 'attack' || (a.type === 'spell' && a.damage))
+    // Get all offensive abilities (damage, debuffs) that target enemies
+    // Filter out buffs that target allies, and abilities we can't afford
+    const offensiveAbilities = abilities
+      .filter(a => {
+        // Must be able to afford the ability
+        if (!this.canAffordAbility(enemy, a)) return false;
+
+        // Include attacks
+        if (a.type === 'attack') return true;
+
+        // Include spells that target enemies (damage or debuff)
+        if (a.type === 'spell' && a.targetType === 'enemy') return true;
+
+        // Include debuffs
+        if (a.type === 'debuff') return true;
+
+        return false;
+      })
       .sort((a, b) => {
-        // Rough damage estimate: use average of dice
-        const avgA = this.estimateDamage(a.damage || '0');
-        const avgB = this.estimateDamage(b.damage || '0');
-        return avgB - avgA;
+        // Sort by estimated tactical value (damage + debuff value)
+        const valueA = this.estimateAbilityValue(a);
+        const valueB = this.estimateAbilityValue(b);
+        return valueB - valueA;
       });
 
     // Find best target for each ability
-    for (const ability of attackAbilities) {
+    for (const ability of offensiveAbilities) {
       const target = this.selectTarget(enemy, heroes, ability);
       if (target) {
         return {
@@ -150,6 +165,13 @@ export class AIController {
       return this.prioritizeTarget(inRange, ['lowHp', 'lowDef', 'closest']);
     } else if (enemyType === 'imp') {
       // Imps: opportunistic, go for low HP
+      return this.prioritizeTarget(inRange, ['lowHp', 'closest']);
+    } else if (enemyType === 'divine_wisp_dark' || enemyType === 'ogre_shaman') {
+      // Casters with debuffs: prioritize healers and high-value targets
+      // For debuffs, lock down the healer; for damage, go for low HP
+      if (ability.effect && !ability.damage) {
+        return this.prioritizeTarget(inRange, ['healer', 'lowDef', 'closest']);
+      }
       return this.prioritizeTarget(inRange, ['lowHp', 'closest']);
     } else {
       // Lemures and default: just attack closest
@@ -308,11 +330,16 @@ export class AIController {
     abilities: Ability[],
     heroes: Unit[]
   ): Ability | null {
-    const attackAbilities = abilities.filter(
-      a => a.type === 'attack' || (a.type === 'spell' && a.damage)
-    );
+    // Get all offensive abilities (attacks, damaging spells, debuffs)
+    const offensiveAbilities = abilities.filter(a => {
+      if (!this.canAffordAbility(enemy, a)) return false;
+      if (a.type === 'attack') return true;
+      if (a.type === 'spell' && a.targetType === 'enemy') return true;
+      if (a.type === 'debuff') return true;
+      return false;
+    });
 
-    if (attackAbilities.length === 0) return null;
+    if (offensiveAbilities.length === 0) return null;
 
     const enemyType = enemy.dataId;
 
@@ -322,16 +349,29 @@ export class AIController {
         h => getDistance(enemy.gridX, enemy.gridY, h.gridX, h.gridY) <= 1
       );
       if (!adjacentHero) {
-        const ranged = attackAbilities.find(a => a.range > 1);
+        const ranged = offensiveAbilities.find(a => a.range > 1);
         if (ranged) return ranged;
       }
     }
 
-    // Default: prefer highest damage
-    return attackAbilities.sort((a, b) => {
-      const avgA = this.estimateDamage(a.damage || '0');
-      const avgB = this.estimateDamage(b.damage || '0');
-      return avgB - avgA;
+    // Shadow wisps and similar casters: prefer debuffs at range
+    if (enemyType === 'divine_wisp_dark' || enemyType === 'ogre_shaman') {
+      const debuffs = offensiveAbilities.filter(a =>
+        a.effect && !a.damage && a.range > 1
+      );
+      if (debuffs.length > 0) {
+        // Prefer hold over other debuffs
+        const hold = debuffs.find(a => a.id === 'hold');
+        if (hold) return hold;
+        return debuffs[0];
+      }
+    }
+
+    // Default: prefer highest tactical value
+    return offensiveAbilities.sort((a, b) => {
+      const valueA = this.estimateAbilityValue(a);
+      const valueB = this.estimateAbilityValue(b);
+      return valueB - valueA;
     })[0];
   }
 
@@ -378,6 +418,15 @@ export class AIController {
       }
     }
 
+    // Shadow Wisps: ranged casters that prefer range 2 for debuffs
+    if (enemy.dataId === 'divine_wisp_dark') {
+      if (closestHeroDist === 2) {
+        score += 25; // Strong bonus for optimal debuff range
+      } else if (closestHeroDist === 1) {
+        score -= 15; // Penalty for being in melee (squishy caster)
+      }
+    }
+
     // Spined Devil prefers to engage multiple targets
     if (enemy.dataId === 'spined_devil') {
       const heroesInMeleeRange = heroes.filter(
@@ -399,6 +448,71 @@ export class AIController {
     const count = parseInt(match[1]);
     const sides = parseInt(match[2]);
     return count * ((sides + 1) / 2); // Average roll
+  }
+
+  /**
+   * Estimate the tactical value of any ability (damage, debuffs, buffs)
+   * Returns an estimated "effective damage" value for AI decision-making
+   */
+  private estimateAbilityValue(ability: Ability): number {
+    // Direct damage abilities
+    if (ability.damage) {
+      return this.estimateDamage(ability.damage);
+    }
+
+    // Effect-based abilities (debuffs, DoTs, healing)
+    if (ability.effect) {
+      const effect = ability.effect;
+
+      // Hold/stun effects - taking a hero out of action is very valuable
+      if (effect.type === 'held') {
+        return 10; // Equivalent to negating ~10 damage worth of hero actions
+      }
+
+      // Poison effects - DoT damage over time
+      if (effect.type === 'poison' && effect.damagePerTurn) {
+        const dotDamage = this.estimateDamage(effect.damagePerTurn);
+        const avgDuration = effect.durationOnFail
+          ? (typeof effect.durationOnFail === 'string'
+              ? this.estimateDamage(effect.durationOnFail)
+              : effect.durationOnFail)
+          : 3;
+        return dotDamage * avgDuration * 0.7; // Discount for delayed damage
+      }
+
+      // Immobilize effects
+      if (effect.type === 'immobilized') {
+        return 6; // Less valuable than hold but still useful
+      }
+
+      // Exposed/defense reduction
+      if (effect.type === 'exposed') {
+        return 5; // Sets up follow-up attacks
+      }
+    }
+
+    // Healing abilities (for ally targeting)
+    if (ability.healing) {
+      return this.estimateDamage(ability.healing);
+    }
+
+    return 0;
+  }
+
+  /**
+   * Check if enemy can afford to use an ability (has enough mana/ki)
+   */
+  private canAffordAbility(enemy: Unit, ability: Ability): boolean {
+    if (!ability.cost || ability.cost === 0) return true;
+
+    if (ability.costType === 'mana') {
+      return (enemy.currentMana ?? 0) >= ability.cost;
+    }
+    if (ability.costType === 'ki') {
+      return (enemy.currentKi ?? 0) >= ability.cost;
+    }
+
+    return true;
   }
 
   /**
