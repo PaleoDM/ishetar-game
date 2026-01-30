@@ -469,13 +469,13 @@ export class NarratorScene extends Phaser.Scene {
     this.dialogueRenderer.showStatic('Oh, a new adventurer! Which of our heroes are you?', 'Miss Tibbets');
 
     // Two-row layout: 3 on top, 2 on bottom
-    // Larger portraits (120px) for better detail
-    const portraitDisplaySize = 120;
+    // Larger portraits to reduce downscaling artifacts (512 -> 140 = ~3.6x instead of 512 -> 120 = ~4.3x)
+    const portraitDisplaySize = 140;
     const centerX = 570; // Center point for the portrait grid (shifted right to avoid Miss Tibbets)
-    const spacingX = 140; // Horizontal spacing between portrait centers
-    const row1Y = 130; // Top row center Y (portraits span Y=70 to Y=190)
-    const row2Y = 300; // Bottom row center Y (portraits span Y=240 to Y=360)
-    const labelOffset = 68; // Distance from portrait center to label
+    const spacingX = 160; // Horizontal spacing between portrait centers
+    const row1Y = 140; // Top row center Y
+    const row2Y = 320; // Bottom row center Y
+    const labelOffset = 78; // Distance from portrait center to label
 
     // Row positions: [row, column] for navigation
     // Row 1: indices 0, 1, 2 (Azrael, Lyra, Rooker)
@@ -496,6 +496,19 @@ export class NarratorScene extends Phaser.Scene {
 
       const img = this.add.image(pos.x, pos.y, hero.portrait);
       img.setDisplaySize(portraitDisplaySize, portraitDisplaySize);
+      // Force LINEAR filtering by setting scale mode directly on texture source
+      // This overrides pixelArt: true more reliably
+      const textureSource = img.texture.source[0];
+      if (textureSource) {
+        textureSource.scaleMode = Phaser.ScaleModes.LINEAR;
+        // Force WebGL to re-upload texture with new filter mode
+        if (textureSource.glTexture && this.game.renderer.type === Phaser.WEBGL) {
+          (this.game.renderer as Phaser.Renderer.WebGL.WebGLRenderer).setTextureFilter(
+            textureSource.glTexture,
+            Phaser.Textures.FilterMode.LINEAR
+          );
+        }
+      }
       this.heroPortraits.push(img);
 
       // Name and class label below
@@ -530,7 +543,7 @@ export class NarratorScene extends Phaser.Scene {
     this.heroSelectionBorder.lineStyle(3, 0xffff00, 1);
 
     const selectedPortrait = this.heroPortraits[this.heroSelection];
-    const size = 120; // Portrait display size
+    const size = 140; // Match the portrait display size
     this.heroSelectionBorder.strokeRect(
       selectedPortrait.x - size / 2 - 4,
       selectedPortrait.y - size / 2 - 4,

@@ -161,7 +161,20 @@ export class PreloadScene extends Phaser.Scene {
     portraitKeys.forEach((key) => {
       const texture = this.textures.get(key);
       if (texture) {
+        // Set filter mode via texture API
         texture.setFilter(Phaser.Textures.FilterMode.LINEAR);
+        // Also directly set scaleMode on texture source for more reliable override of pixelArt: true
+        const source = texture.source[0];
+        if (source) {
+          source.scaleMode = Phaser.ScaleModes.LINEAR;
+          // If WebGL renderer, also update the GL texture filter
+          if (source.glTexture && this.game.renderer.type === Phaser.WEBGL) {
+            (this.game.renderer as Phaser.Renderer.WebGL.WebGLRenderer).setTextureFilter(
+              source.glTexture,
+              Phaser.Textures.FilterMode.LINEAR
+            );
+          }
+        }
       }
     });
 
