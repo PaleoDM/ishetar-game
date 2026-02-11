@@ -147,7 +147,6 @@ export interface EnemyData {
   resilience: number;
   speed: number;
   abilities: string[];
-  xpReward: number;
   flying?: boolean; // Flying units ignore terrain restrictions
 }
 
